@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import React, { useState, useMemo } from 'react';
+import Box from '@mui/material/Box';
+import { cyan } from '@mui/material/colors';
+import NotesInput from './NotesInput';
+import Note from './Note';
+import SignIn from './SignIn';
+import LogIn from './LogIn';
+
+export const NotesContext = React.createContext({
+    notes: [],
+    setNotes: () => {},
+});
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [notes, setNotes] = useState([]);
+    const value = useMemo(() => ({ notes, setNotes }), [notes]);  
+
+    function dateCheck() {                   
+        setTimeout(function check() {                                                      
+            notes.forEach(item => {                                                      
+                if (item.date && item.date.getTime() < Date.now() && item.date.getTime() + 1000 > Date.now()) {                        
+                    alert(item.data + ' is overdue!')                        
+                } 
+            });            
+            setTimeout(check, 1000);              
+        }, 1000)               
+    }  
+    dateCheck();       
+
+    return (
+        <NotesContext.Provider value={value}>
+                <>  
+                    <Box
+                        sx={{                                                   
+                            boxShadow: 1,
+                            borderRadius: 3,
+                            p: 2,
+                            maxWidth: 500,
+                            backgroundColor: cyan[50],
+                        }}
+                    >     
+                        <Routes>
+                            <Route path="/" element={<LogIn /> } />
+                            <Route path="signin" element={<SignIn /> } />
+                            <Route path="profile" element={<NotesInput /> } />
+                            <Route path="profile/note" element={<Note /> } />               
+                        </Routes> 
+                    </Box>
+                </>
+            </NotesContext.Provider>   
+    );
 }
 
 export default App;
