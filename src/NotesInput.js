@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 import NotesList from './NotesList';
 import { NotesContext } from './App';
 import { Container } from '@mui/material';
@@ -33,11 +34,23 @@ export default function NotesInput() {
     }
     return (        
         <>  
+            <Container 
+                className="container"               
+                sx={{                                                       
+                    display: 'flex',
+                }}
+            >            
+                <Typography variant="h6" color="primary" gutterBottom component="div">
+                    MyNote
+                </Typography>              
+            </Container>
+
             <StyledEngineProvider injectFirst>
                 <Container 
                     className="container"               
                     sx={{                                                       
                         display: 'flex',
+                        ml: -3,
                     }}
                 >            
                     <TextField label={'Enter a note'} id="input" value={input} sx={{mr: 1, minWidth: 400}} onChange={(event) => setInput(event.target.value)} size="small" />
@@ -50,7 +63,7 @@ export default function NotesInput() {
             <Paper
                 elevation={3}
                 sx={{ 
-                    mt: 1,                                      
+                    mt: 1,                                                          
                     borderRadius: 3,
                     p: 2,
                     maxWidth: 500,

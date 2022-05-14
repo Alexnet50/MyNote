@@ -129,7 +129,7 @@ function NoteEdit(props) {
                 </Container>
             </StyledEngineProvider> 
 
-            <Link to="../profile">
+            <Link to="../profile" underline="none">
                 <Button variant="outlined" size="medium" onClick={backClick}>
                     Back
                 </Button> 

@@ -5,7 +5,7 @@ import { cyan } from '@mui/material/colors';
 import NotesInput from './NotesInput';
 import Note from './Note';
 import SignIn from './SignIn';
-import LogIn from './LogIn';
+import Home from './Home';
 
 export const NotesContext = React.createContext({
     notes: [],
@@ -41,9 +41,9 @@ function App() {
                         }}
                     >     
                         <Routes>
-                            <Route path="/" element={<LogIn /> } />
+                            <Route path="/" element={<Home /> } />
                             <Route path="signin" element={<SignIn /> } />
-                            <Route path="profile" element={<NotesInput /> } />
+                            <Route path="profile/*" element={<NotesInput /> } />
                             <Route path="profile/note" element={<Note /> } />               
                         </Routes> 
                     </Box>
